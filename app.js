@@ -8,7 +8,8 @@ const cors = require('cors');
 const serverPOST = 3030;
 const PORT = process.env.PORT || serverPOST;
 
-const AuthRoute = require();
+const AuthRoute = require('./src/routes/auth');
+const UserRoute = require('./src/routes/user');
 
 app.listen(PORT, () => {
 	console.log(`Server is running on port: ${PORT}`);
@@ -23,4 +24,8 @@ app.use(
 	})
 );
 
-app.use('');
+// Route for Auth
+app.use('/', AuthRoute);
+
+// Rouute for User
+app.use('/user', UserRoute);
