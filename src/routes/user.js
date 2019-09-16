@@ -8,7 +8,6 @@ const UserController = require('../controllers/user');
 app.use(cors());
 Route.get('/', UserController.getUsers)
 	.get('/show/:id', UserController.getAUser)
-	.post('/', UserController.insertUser)
 	.patch('/:id', UserController.updateUser)
 	.delete('/:id', UserController.deleteUser);
 
