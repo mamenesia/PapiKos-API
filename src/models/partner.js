@@ -1,9 +1,9 @@
 const conn = require('../config/db');
 
 module.exports = {
-	getUsers: () => {
+	getPartners: () => {
 		return new Promise((resolve, reject) => {
-			conn.query('SELECT * FROM user', (err, result) => {
+			conn.query('SELECT * FROM partner', (err, result) => {
 				if (!err) {
 					resolve(result);
 				} else {
@@ -12,9 +12,9 @@ module.exports = {
 			});
 		});
 	},
-	getAUser: id => {
+	getAPartner: id => {
 		return new Promise((resolve, reject) => {
-			conn.query('SELECT * FROM user WHERE id = ?', id, (err, result) => {
+			conn.query('SELECT * FROM partner WHERE id = ?', id, (err, result) => {
 				if (!err) {
 					resolve(result);
 				} else {
@@ -23,10 +23,10 @@ module.exports = {
 			});
 		});
 	},
-	updateUser: (data, id) => {
+	updatePartner: (data, id) => {
 		return new Promise((resolve, reject) => {
 			conn.query(
-				'UPDATE user SET ? WHERE id = ?',
+				'UPDATE partner SET ? WHERE id = ?',
 				[data, id],
 				(err, result) => {
 					if (!err) {
@@ -38,9 +38,9 @@ module.exports = {
 			);
 		});
 	},
-	deleteUser: id => {
+	deletePartner: id => {
 		return new Promise((resolve, reject) => {
-			conn.query('DELETE FROM user WHERE id = ?', id, (err, result) => {
+			conn.query('DELETE FROM partner WHERE id = ?', id, (err, result) => {
 				if (!err) {
 					resolve(result);
 				} else {
