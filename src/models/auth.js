@@ -41,8 +41,8 @@ module.exports = {
 	loginPartner: data => {
 		return new Promise((resolve, reject) => {
 			conn.query(
-				'SELECT * FROM partner WHERE username= ? ',
-				data.username,
+				'SELECT * FROM partner WHERE email= ? ',
+				data.email,
 				(err, result) => {
 					if (!err) {
 						resolve(result);

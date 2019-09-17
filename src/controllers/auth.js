@@ -4,22 +4,8 @@ const modelAuth = require('../models/auth');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-const {
-	registerValidation,
-	loginValidation
-} = require('../middleware/validation');
-
 module.exports = {
 	registerUser: (req, res) => {
-		// Validate user data
-		// const { error } = registerValidation(req.body);
-		// if (error) {
-		// 	return res.status(400).send({
-		// 		status: 400,
-		// 		message: error.details[0].message
-		// 	});
-		// }
-
 		// Hash the password
 		const salt = bcrypt.genSaltSync(10);
 		const hashedPassword = bcrypt.hashSync(req.body.password, salt);
@@ -67,12 +53,16 @@ module.exports = {
 
 		const data = {
 			fullname: req.body.fullname,
-			username: req.body.username,
-			photo:
-				'https://cdn2.iconfinder.com/data/icons/free-basic-icon-set-2/300/2-512.png',
+			labelName: req.body.labelName,
 			phone: req.body.phone,
 			email: req.body.email,
-			password: hashedPassword
+			password: hashedPassword,
+			photo:
+				'https://cdn2.iconfinder.com/data/icons/free-basic-icon-set-2/300/2-512.png',
+			address: req.body.address,
+			latitude: req.body.latitude,
+			longitude: req.body.longitude,
+			id_location: req.body.id_location
 		};
 
 		modelAuth.registerUserCheck(data).then(result => {
@@ -101,13 +91,6 @@ module.exports = {
 		});
 	},
 	loginUser: (req, res) => {
-		// const { error } = loginValidation(req.body);
-		// if (error) {
-		// 	return res.status(400).send({
-		// 		status: 400,
-		// 		message: error.details[0].message
-		// 	});
-		// }
 		const data = {
 			username: req.body.username,
 			password: req.body.password
@@ -154,7 +137,7 @@ module.exports = {
 	},
 	loginPartner: (req, res) => {
 		const data = {
-			username: req.body.username,
+			email: req.body.email,
 			password: req.body.password
 		};
 
@@ -184,8 +167,8 @@ module.exports = {
 				res.send({
 					status: 200,
 					message: 'Login successfully!',
-					username: result.username,
-					password: result.password,
+					email: req.body.email,
+					password: req.body.password,
 					token
 				});
 			})
