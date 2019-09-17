@@ -12,6 +12,17 @@ module.exports = {
 			});
 		});
 	},
+	registerPartner: data => {
+		return new Promise((resolve, reject) => {
+			conn.query('INSERT partner SET ?', data, (err, result) => {
+				if (!err) {
+					resolve(result);
+				} else {
+					reject(err);
+				}
+			});
+		});
+	},
 	loginUser: data => {
 		return new Promise((resolve, reject) => {
 			conn.query(
@@ -27,7 +38,22 @@ module.exports = {
 			);
 		});
 	},
-	registerCheck: data => {
+	loginPartner: data => {
+		return new Promise((resolve, reject) => {
+			conn.query(
+				'SELECT * FROM partner WHERE username= ? ',
+				data.username,
+				(err, result) => {
+					if (!err) {
+						resolve(result);
+					} else {
+						reject(result);
+					}
+				}
+			);
+		});
+	},
+	registerUserCheck: data => {
 		return new Promise((resolve, reject) => {
 			conn.query(
 				`SELECT * FROM user WHERE username=? OR email=?`,

@@ -9,7 +9,9 @@ Route.get('/', (req, res) => {
 		register: 'Register your account today to use Papikost API'
 	});
 })
-	.post('/register', AuthController.registerUser)
-	.post('/login', AuthController.loginUser);
+	.post('/register/user', AuthController.registerUser)
+	.post('/login/user', AuthController.loginUser)
+	.post('/register/partner', AuthController.registerPartner)
+	.post('/login/partner', AuthController.loginPartner);
 
 module.exports = Route;

@@ -20,14 +20,14 @@ module.exports = {
 			.getAUser(id)
 			.then(result => {
 				if (result[0] === undefined) {
-					return res.send({
+					return res.status(400).send({
 						status: 400,
 						message: "The user doesn't exist"
 					});
 				} else {
 					return res.send({
 						status: 200,
-						id: id,
+						id,
 						message: 'The user data is successfully retrieved',
 						result
 					});
@@ -60,7 +60,7 @@ module.exports = {
 					})
 					.catch(err => console.log(err));
 			} else {
-				return res.send({
+				return res.status(400).send({
 					status: 400,
 					id,
 					message: 'User does not exist'
@@ -83,7 +83,7 @@ module.exports = {
 					})
 					.catch(err => console.log(err));
 			} else {
-				return res.send({
+				return res.status(400).send({
 					status: 400,
 					id,
 					message: 'Book does not exist'
