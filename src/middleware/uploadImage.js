@@ -6,7 +6,7 @@ const uploadImage = async rq => {
   let image = ""
   await uploader
     .upload(file, {
-      folder: "rentbookapp"
+      folder: "papikos"
     })
     .then(result => {
       console.log("Sukses Upload", result.public_id)
@@ -20,7 +20,7 @@ const deleteImage = id => {
   console.log("cek id", id)
   if (id.indexOf("cloudinary") > -1) {
     let newId = id.split("/")[8].substring(0, 20)
-    return uploader.destroy(`rentbookapp/${newId}`, function(error, result) {
+    return uploader.destroy(`papikos/${newId}`, function(error, result) {
       console.log(result, error)
     })
   }
