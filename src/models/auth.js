@@ -1,27 +1,27 @@
-const conn = require("../config/db")
+const conn = require('../config/db')
 
 module.exports = {
 	registerUser: data => {
 		return new Promise((resolve, reject) => {
 			conn.query('INSERT user SET ?', data, (err, result) => {
 				if (!err) {
-					resolve(result);
+					resolve(result)
 				} else {
-					reject(err);
+					reject(err)
 				}
-			});
-		});
+			})
+		})
 	},
 	registerPartner: data => {
 		return new Promise((resolve, reject) => {
 			conn.query('INSERT partner SET ?', data, (err, result) => {
 				if (!err) {
-					resolve(result);
+					resolve(result)
 				} else {
-					reject(err);
+					reject(err)
 				}
-			});
-		});
+			})
+		})
 	},
 	loginUser: data => {
 		return new Promise((resolve, reject) => {
@@ -30,13 +30,13 @@ module.exports = {
 				data.username,
 				(err, result) => {
 					if (!err) {
-						resolve(result);
+						resolve(result)
 					} else {
-						reject(result);
+						reject(result)
 					}
 				}
-			);
-		});
+			)
+		})
 	},
 	loginPartner: data => {
 		return new Promise((resolve, reject) => {
@@ -45,13 +45,13 @@ module.exports = {
 				data.email,
 				(err, result) => {
 					if (!err) {
-						resolve(result);
+						resolve(result)
 					} else {
-						reject(result);
+						reject(result)
 					}
 				}
-			);
-		});
+			)
+		})
 	},
 	registerUserCheck: data => {
 		return new Promise((resolve, reject) => {
@@ -60,12 +60,27 @@ module.exports = {
 				[data.username, data.email],
 				(err, result) => {
 					if (!err) {
-						resolve(result);
+						resolve(result)
 					} else {
-						reject(result);
+						reject(result)
 					}
 				}
-			);
-		});
+			)
+		})
+	},
+	registerPartnerCheck: data => {
+		return new Promise((resolve, reject) => {
+			conn.query(
+				'SELECT * FROM partner WHERE labelName=? OR email=?',
+				[data.labelName, data.email],
+				(err, result) => {
+					if (!err) {
+						resolve(result)
+					} else {
+						reject(err)
+					}
+				}
+			)
+		})
 	}
-};
+}
