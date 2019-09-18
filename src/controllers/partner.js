@@ -1,5 +1,5 @@
-require('dotenv').config();
-const modelPartner = require('../models/partner');
+require("dotenv").config()
+const modelPartner = require("../models/partner")
 
 module.exports = {
 	getPartners: (req, res) => {
@@ -46,46 +46,46 @@ module.exports = {
 			id_location: req.body.id_location
 		};
 
-		modelPartner.getAPartner(id).then(result => {
-			if (result.length !== 0) {
-				return modelPartner
-					.updatePartner(data, id)
-					.then(result => {
-						res.send({
-							status: 200,
-							message: 'Partner data has been successfully updated',
-							id,
-							data
-						});
-					})
-					.catch(err => console.log(err));
-			} else {
-				return res.status(400).send({
-					status: 400,
-					id,
-					message: 'Partner does not exist'
-				});
-			}
-		});
-	},
-	deletePartner: (req, res) => {
-		const id = req.params.id;
-		modelPartner.getAPartner(id).then(result => {
-			if (result.length !== 0) {
-				return modelPartner.deletePartner(id).then(result => {
-					res.send({
-						status: 200,
-						id,
-						message: 'Partner has been deleted'
-					});
-				});
-			} else {
-				return res.status(400).send({
-					status: 400,
-					id,
-					message: 'Partner does not exist'
-				});
-			}
-		});
-	}
-};
+    modelPartner.getAPartner(id).then(result => {
+      if (result.length !== 0) {
+        return modelPartner
+          .updatePartner(data, id)
+          .then(result => {
+            res.send({
+              status: 200,
+              message: "Partner data has been successfully updated",
+              id,
+              data
+            })
+          })
+          .catch(err => console.log(err))
+      } else {
+        return res.status(400).send({
+          status: 400,
+          id,
+          message: "Partner does not exist"
+        })
+      }
+    })
+  },
+  deletePartner: (req, res) => {
+    const id = req.params.id
+    modelPartner.getAPartner(id).then(result => {
+      if (result.length !== 0) {
+        return modelPartner.deletePartner(id).then(result => {
+          res.send({
+            status: 200,
+            id,
+            message: "Partner has been deleted"
+          })
+        })
+      } else {
+        return res.status(400).send({
+          status: 400,
+          id,
+          message: "Partner does not exist"
+        })
+      }
+    })
+  }
+}

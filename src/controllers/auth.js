@@ -1,8 +1,8 @@
-require('dotenv').config();
+require("dotenv").config()
 
-const modelAuth = require('../models/auth');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const modelAuth = require("../models/auth")
+const jwt = require("jsonwebtoken")
+const bcrypt = require("bcryptjs")
 
 module.exports = {
 	registerUser: (req, res) => {
@@ -10,47 +10,47 @@ module.exports = {
 		const salt = bcrypt.genSaltSync(10);
 		const hashedPassword = bcrypt.hashSync(req.body.password, salt);
 
-		// if register data valid, proceed to insert user data to db
-		const data = {
-			fullname: req.body.fullname,
-			username: req.body.username,
-			photo:
-				'https://upload.wikimedia.org/wikipedia/commons/6/67/User_Avatar.png',
-			phone: req.body.phone,
-			email: req.body.email,
-			password: hashedPassword
-		};
+    // if register data valid, proceed to insert user data to db
+    const data = {
+      fullname: req.body.fullname,
+      username: req.body.username,
+      photo:
+        "https://upload.wikimedia.org/wikipedia/commons/6/67/User_Avatar.png",
+      phone: req.body.phone,
+      email: req.body.email,
+      password: hashedPassword
+    }
 
-		// Check username or email already exist
-		modelAuth.registerUserCheck(data).then(result => {
-			if (result.length === 0) {
-				return modelAuth
-					.registerUser(data)
-					.then(result => {
-						res.send({
-							status: 200,
-							message: 'User successfully registered!',
-							user: {
-								fullname: req.body.fullname,
-								username: req.body.username,
-								phone: req.body.phone,
-								email: req.body.email
-							}
-						});
-					})
-					.catch(err => console.log(err));
-			} else {
-				return res.status(400).send({
-					status: 400,
-					message: 'Username or Email already registered!'
-				});
-			}
-		});
-	},
-	registerPartner: (req, res) => {
-		const salt = bcrypt.genSaltSync(10);
-		const hashedPassword = bcrypt.hashSync(req.body.password, salt);
-
+    // Check username or email already exist
+    modelAuth.registerUserCheck(data).then(result => {
+      if (result.length === 0) {
+        return modelAuth
+          .registerUser(data)
+          .then(result => {
+            res.send({
+              status: 200,
+              message: "User successfully registered!",
+              user: {
+                fullname: req.body.fullname,
+                username: req.body.username,
+                phone: req.body.phone,
+                email: req.body.email
+              }
+            })
+          })
+          .catch(err => console.log(err))
+      } else {
+        return res.status(400).send({
+          status: 400,
+          message: "Username or Email already registered!"
+        })
+      }
+    })
+  },
+  registerPartner: (req, res) => {
+    const salt = bcrypt.genSaltSync(10)
+    const hashedPassword = bcrypt.hashSync(req.body.password, salt)
+    
 		const data = {
 			fullname: req.body.fullname,
 			labelName: req.body.labelName,
