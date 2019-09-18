@@ -15,6 +15,7 @@ const UserRoute = require('./src/routes/user')
 const PartnerRoute = require('./src/routes/partner')
 const RoomRoute = require('./src/routes/rooms')
 const BookingRoute = require('./src/routes/booking')
+const PaymentRoute = require('./src/routes/payment')
 
 app.listen(PORT, () => {
 	console.log(`Server is running on port: ${PORT}`)
@@ -38,3 +39,4 @@ app.use('/user', UserRoute)
 app.use('/partner', PartnerRoute)
 app.use('/rooms', RoomRoute)
 app.use('/booking', BookingRoute)
+app.use('/payment', PaymentRoute)

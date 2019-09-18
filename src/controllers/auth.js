@@ -60,9 +60,9 @@ module.exports = {
 			photo:
 				'https://cdn2.iconfinder.com/data/icons/free-basic-icon-set-2/300/2-512.png',
 			address: req.body.address,
-			latitude: req.body.latitude,
-			longitude: req.body.longitude,
-			id_location: req.body.id_location
+			latitude: 'not set',
+			longitude: 'not set',
+			id_location: 1
 		}
 
 		modelAuth.registerPartnerCheck(data).then(result => {
@@ -85,7 +85,7 @@ module.exports = {
 			} else {
 				return res.status(400).send({
 					status: 400,
-					message: 'Username or Email already registered!'
+					message: 'Label Name or Email already registered!'
 				})
 			}
 		})

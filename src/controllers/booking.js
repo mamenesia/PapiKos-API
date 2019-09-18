@@ -94,22 +94,25 @@ module.exports = {
 	},
 	deleteBooking: (req, res) => {
 		const id = req.params.id
-		modelBooking.getABooking(id).then(result => {
-			if (result.length !== 0) {
-				return modelBooking.deleteBooking(id).then(result => {
-					res.send({
-						status: 200,
-						id,
-						message: 'Booking data has been deleted'
+		modelBooking
+			.getABooking(id)
+			.then(result => {
+				if (result.length !== 0) {
+					return modelBooking.deleteBooking(id).then(result => {
+						res.send({
+							status: 200,
+							id,
+							message: 'Booking data has been deleted'
+						})
 					})
-				})
-			} else {
-				return res.status(400).send({
-					status: 400,
-					id,
-					message: 'Booking data does not exist'
-				})
-			}
-		})
+				} else {
+					return res.status(400).send({
+						status: 400,
+						id,
+						message: 'Booking data does not exist'
+					})
+				}
+			})
+			.catch(err => console.log(err))
 	}
 }
