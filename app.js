@@ -4,8 +4,8 @@ const app = express();
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const serverPOST = 3306;
-const PORT = process.env.PORT || serverPOST;
+const serverPORT = 3306;
+const PORT = process.env.PORT || serverPORT;
 //add cloudinary config
 const { cloudinaryConfig } = require('./src/config/cloudinaryConfig');
 
