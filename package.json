@@ -1,41 +1,41 @@
 {
-  "name": "papikos",
-  "version": "1.0.0",
-  "description": "papikos API",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mamenesia/PapiKos-API.git",
-    "start": "nodemon app.js"
-  },
-  "keywords": [
-    "REST",
-    "API",
-    "PapiKos",
-    "Backend"
-  ],
-  "author": "Team Faztract 3",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mamenesia/PapiKos-API/issues"
-  },
-  "homepage": "https://github.com/mamenesia/PapiKos-API#readme",
-  "dependencies": {
-    "@hapi/joi": "^16.1.1",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "cloudinary": "^1.15.0",
-    "cors": "^2.8.5",
-    "datauri": "^2.0.0",
-    "dotenv": "^8.1.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "morgan": "^1.9.1",
-    "multer": "^1.4.2",
-    "mysql": "^2.17.1",
-    "redis": "^2.8.0"
-  }
+	"name": "papikos",
+	"version": "1.0.0",
+	"description": "papikos API",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node app.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mamenesia/PapiKos-API.git"
+	},
+	"keywords": [
+		"REST",
+		"API",
+		"PapiKos",
+		"Backend"
+	],
+	"author": "Team Faztract 3",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/mamenesia/PapiKos-API/issues"
+	},
+	"homepage": "https://github.com/mamenesia/PapiKos-API#readme",
+	"dependencies": {
+		"@hapi/joi": "^16.0.1",
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.19.0",
+		"cloudinary": "^1.15.0",
+		"cors": "^2.8.5",
+		"datauri": "^2.0.0",
+		"dotenv": "^8.1.0",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"morgan": "^1.9.1",
+		"multer": "^1.4.2",
+		"mysql": "^2.17.1",
+		"redis": "^2.8.0"
+	}
 }
