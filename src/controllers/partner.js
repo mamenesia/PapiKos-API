@@ -38,11 +38,12 @@ module.exports = {
 		const id = req.params.id;
 		const data = {
 			fullname: req.body.fullname,
-			username: req.body.username,
-			photo:
-				'https://cdn2.iconfinder.com/data/icons/free-basic-icon-set-2/300/2-512.png',
+			labelName: req.body.labelName,
 			phone: req.body.phone,
-			email: req.body.email
+			email: req.body.email,
+			photo: req.body.photo,
+			address: req.body.address,
+			id_location: req.body.id_location
 		};
 
 		modelPartner.getAPartner(id).then(result => {

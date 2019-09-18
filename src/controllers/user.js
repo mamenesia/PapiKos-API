@@ -40,8 +40,7 @@ module.exports = {
 		const data = {
 			fullname: req.body.fullname,
 			username: req.body.username,
-			photo:
-				'https://upload.wikimedia.org/wikipedia/commons/6/67/User_Avatar.png',
+			photo: req.body.photo,
 			phone: req.body.phone,
 			email: req.body.email
 		};
