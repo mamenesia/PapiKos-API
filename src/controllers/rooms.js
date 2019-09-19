@@ -1,5 +1,5 @@
-const modelRooms = require("../models/rooms")
-const { uploadImage, deleteImage } = require("../middleware/uploadImage")
+const modelRooms = require('../models/rooms')
+const { uploadImage, deleteImage } = require('../middleware/uploadImage')
 
 module.exports = {
   getRoomById: (req, res) => {
@@ -170,23 +170,23 @@ module.exports = {
     const page = parseInt(req.query.page, 10) || 1
     const start = (page - 1) * limit
 
-    paramUrl.limit = limit
-    paramUrl.start = start
+		paramUrl.limit = limit
+		paramUrl.start = start
 
-    modelRooms
-      .getRoomAll(paramUrl)
-      .then(rs => {
-        res.json({
-          status: 200,
-          message: "Sukses",
-          data: rs
-        })
-      })
-      .catch(err => {
-        res.status(500).json({
-          status: 500,
-          message: err.message || "same error"
-        })
-      })
-  }
+		modelRooms
+			.getRoomAll(paramUrl)
+			.then(rs => {
+				res.json({
+					status: 200,
+					message: 'Sukses',
+					data: rs
+				})
+			})
+			.catch(err => {
+				res.status(500).json({
+					status: 500,
+					message: err.message || 'same error'
+				})
+			})
+	}
 }

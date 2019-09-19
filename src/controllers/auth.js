@@ -1,8 +1,8 @@
-require("dotenv").config()
+require('dotenv').config()
 
-const modelAuth = require("../models/auth")
-const jwt = require("jsonwebtoken")
-const bcrypt = require("bcryptjs")
+const modelAuth = require('../models/auth')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 
 module.exports = {
   registerUser: (req, res) => {

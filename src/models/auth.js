@@ -1,4 +1,4 @@
-const conn = require("../config/db")
+const conn = require('../config/db')
 
 module.exports = {
   registerUser: data => {
