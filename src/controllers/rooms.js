@@ -29,8 +29,7 @@ module.exports = {
 			id_partner,
 			room_area,
 			room_type_id,
-			status,
-			gender
+			status
 		} = req.body
 		if (
 			name == null ||
@@ -39,8 +38,7 @@ module.exports = {
 			id_partner == null ||
 			room_area == null ||
 			room_type_id == null ||
-			status == null ||
-			gender == null
+			status == null
 		) {
 			return res.status(400).json({
 				status: 400,
@@ -62,8 +60,7 @@ module.exports = {
 			room_area,
 			image,
 			room_type_id,
-			status: 'true',
-			gender
+			status: 'true'
 		}
 		// console.log(data)
 		// let a = facilities.split(",")
@@ -163,7 +160,6 @@ module.exports = {
 			sorting: req.query.sort,
 			status: req.query.status,
 			type: req.query.type,
-			gender: req.query.gender,
 			search: req.query.search
 		}
 		const limit = parseInt(req.query.limit, 10) || 15
