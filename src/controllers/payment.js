@@ -40,7 +40,7 @@ module.exports = {
 		const data = {
 			bookid: req.body.bookid,
 			amount: req.body.paid_amount,
-			status: req.body.status,
+			status: 'Pending',
 			invoice_id: req.body.invoice_id,
 			bank: req.body.bank_code,
 			paymentDate: req.body.paymentDate,
@@ -60,7 +60,7 @@ module.exports = {
 						invoice_id: req.body.invoice_id,
 						bank: req.body.bank_code,
 						paymentDate: new Date(Date.now()),
-						user_id: req.body.user_id
+						id_user: req.body.id_user
 					}
 				})
 			})
