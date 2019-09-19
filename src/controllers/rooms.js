@@ -94,10 +94,10 @@ module.exports = {
     const data = { ...req.body }
     modelRooms
       .getRoomById(id)
-      .then(rs => {
+      .then(async rs => {
         if (rs.length > 0) {
           if (req.files.length > 0) {
-            data.image = `${uploadImage(req)}`
+            image = `${await uploadImage(req)}`
           }
           return modelRooms
             .editRoom(data, id)
