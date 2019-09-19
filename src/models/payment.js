@@ -37,7 +37,7 @@ module.exports = {
 	updatePayment: (data, id) => {
 		return new Promise((resolve, reject) => {
 			conn.query(
-				'UPDATE payment SET ? WHERE id = ?',
+				'UPDATE payment SET ? WHERE bookid = ?',
 				[data, id],
 				(err, result) => {
 					if (!err) {
