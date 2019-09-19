@@ -56,7 +56,7 @@ module.exports = {
 					payment: {
 						bookid: req.body.bookid,
 						amount: req.body.paid_amount,
-						status: req.body.status,
+						status: 'Pending',
 						invoice_id: req.body.invoice_id,
 						bank: req.body.bank_code,
 						paymentDate: new Date(Date.now()),
