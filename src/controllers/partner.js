@@ -1,61 +1,69 @@
-require("dotenv").config()
 const modelPartner = require("../models/partner")
+const { uploadImage, deleteImage } = require("../middleware/uploadImage")
 
 module.exports = {
-	getPartners: (req, res) => {
-		modelPartner
-			.getPartners()
-			.then(result => {
-				res.send({
-					status: 200,
-					message: 'All Partners are successfully fetched!',
-					result
-				});
-			})
-			.catch(err => console.log(err));
-	},
-	getAPartner: (req, res) => {
-		const id = req.params.id;
-		modelPartner
-			.getAPartner(id)
-			.then(result => {
-				if (result[0] === undefined) {
-					return res
-						.status(400)
-						.send({ status: 400, message: 'The Partner does not exist' });
-				} else {
-					return res.send({
-						status: 200,
-						id,
-						message: 'The Partner data is successfully retrieved',
-						result
-					});
-				}
-			})
-			.catch(err => console.log(err));
-	},
-	updatePartner: (req, res) => {
-		const id = req.params.id;
-		const data = {
-			fullname: req.body.fullname,
-			labelName: req.body.labelName,
-			phone: req.body.phone,
-			email: req.body.email,
-			photo: req.body.photo,
-			address: req.body.address,
-			id_location: req.body.id_location
-		};
-
-    modelPartner.getAPartner(id).then(result => {
-      if (result.length !== 0) {
+  getPartners: (req, res) => {
+    const paramUrl = {
+      region: req.query.region,
+      search: req.query.search
+    }
+    modelPartner
+      .getPartners(paramUrl)
+      .then(result => {
+        res.send({
+          status: 200,
+          message: "All Partners are successfully fetched!",
+          data: result
+        })
+      })
+      .catch(err => {
+        res.status(500).json({
+          status: 500,
+          message: err.message || "same error"
+        })
+      })
+  },
+  getAPartner: (req, res) => {
+    const id = req.params.id
+    modelPartner
+      .getAPartner(id)
+      .then(result => {
+        if (result[0] === undefined) {
+          return res
+            .status(400)
+            .send({ status: 400, message: "The Partner does not exist" })
+        } else {
+          return res.send({
+            status: 200,
+            message: "The Partner data is successfully retrieved",
+            data: result
+          })
+        }
+      })
+      .catch(err => {
+        res.status(500).json({
+          status: 500,
+          message: err.message || "same error"
+        })
+      })
+  },
+  updatePartner: (req, res) => {
+    const id = req.params.id
+    const data = { ...req.body }
+    modelPartner.getAPartner(id).then(async result => {
+      if (result.length > 0) {
+        if (req.files.length > 0) {
+          data.photo = `${await uploadImage(req)}`
+        }
         return modelPartner
           .updatePartner(data, id)
           .then(result => {
-            res.send({
-              status: 200,
-              message: "Partner data has been successfully updated",
-              id,
-              data
+            modelPartner.getAPartner(id).then(newData => {
+              res.json({
+                status: 200,
+                message: `partner ${id} has been updated`,
+                data: newData
+              })
             })
           })
           .catch(err => console.log(err))
@@ -70,22 +78,30 @@ module.exports = {
   },
   deletePartner: (req, res) => {
     const id = req.params.id
-    modelPartner.getAPartner(id).then(result => {
-      if (result.length !== 0) {
-        return modelPartner.deletePartner(id).then(result => {
-          res.send({
-            status: 200,
-            id,
-            message: "Partner has been deleted"
+    modelPartner
+      .getAPartner(id)
+      .then(result => {
+        if (result.length > 0) {
+          return modelPartner.deletePartner(id).then(result => {
+            res.send({
+              status: 200,
+              id,
+              message: `Partner ${id} has been deleted`
+            })
           })
+        } else {
+          return res.status(400).send({
+            status: 400,
+            id,
+            message: "Partner does not exist"
+          })
+        }
+      })
+      .catch(err => {
+        res.status(500).json({
+          status: 500,
+          message: err.message || "same error"
         })
-      } else {
-        return res.status(400).send({
-          status: 400,
-          id,
-          message: "Partner does not exist"
-        })
-      }
-    })
+      })
   }
 }
