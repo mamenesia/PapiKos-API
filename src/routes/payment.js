@@ -12,4 +12,6 @@ Route.get('/', PaymentController.getPayments)
 	.patch('/:id', PaymentController.updatePayment)
 	.delete('/:id', PaymentController.deletePayment)
 
+	.post('/patch_payment',PaymentController.paid)
+
 module.exports = Route

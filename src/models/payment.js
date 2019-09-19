@@ -59,5 +59,16 @@ module.exports = {
 				}
 			})
 		})
-	}
+	},
+
+	paid:(data,external_id)=>{
+        return new Promise((resolve,reject)=>{
+            conn.query('update payment set ? where bookid = ?',[data,external_id],(err,result)=>{
+                 if (!err)
+                     resolve(result)
+                     reject(err)
+            })
+    })},
+
+
 }
