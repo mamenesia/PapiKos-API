@@ -5,7 +5,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       const region = param.region
       const search = param.search
-      let basicquery = `SELECT partner.id, partner.fullname, partner.labelName, partner.phone, partner.photo,partner.email,partner.password,partner.address,partner.latitude,partner.longitude,partner.id_location,location.name as region, location.loc_lattitude as region_lat, location.loc_longitude as region_long from partner INNER JOIN location ON partner.id_location= location.id_location where 1 `
+      let basicquery = `SELECT partner.id, partner.fullname, partner.labelName, partner.phone, partner.photo,partner.gender, partner.device_id,partner.images,partner.email,partner.password,partner.address,partner.latitude,partner.longitude,partner.id_location,location.name as region, location.loc_lattitude as region_lat, location.loc_longitude as region_long from partner INNER JOIN location ON partner.id_location= location.id_location where 1 `
       if (region != null) {
         basicquery += ` AND location.name = '${region}'`
       }
@@ -24,7 +24,7 @@ module.exports = {
   getAPartner: id => {
     return new Promise((resolve, reject) => {
       conn.query(
-        "SELECT partner.id, partner.fullname, partner.labelName, partner.phone, partner.photo,partner.email,partner.password,partner.address,partner.latitude,partner.longitude,partner.id_location,location.name as region, location.loc_lattitude as region_lat, location.loc_longitude as region_long from partner INNER JOIN location ON partner.id_location= location.id_location where partner.id = ?",
+        "SELECT partner.id, partner.fullname, partner.labelName, partner.phone, partner.photo,partner.gender, partner.device_id,partner.images,partner.email,partner.password,partner.address,partner.latitude,partner.longitude,partner.id_location,location.name as region, location.loc_lattitude as region_lat, location.loc_longitude as region_long from partner INNER JOIN location ON partner.id_location= location.id_location where partner.id = ?",
         id,
         (err, result) => {
           if (!err) {

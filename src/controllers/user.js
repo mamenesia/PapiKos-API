@@ -50,7 +50,7 @@ module.exports = {
             modelUser.getAUser(id).then(newData => {
               res.json({
                 status: 200,
-                message: `partner ${id} has been updated`,
+                message: `User ${id} has been updated`,
                 data: newData
               })
             })
