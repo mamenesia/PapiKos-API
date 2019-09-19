@@ -44,7 +44,7 @@ module.exports = {
 			invoice_id: req.body.invoice_id,
 			bank: req.body.bank_code,
 			paymentDate: req.body.paymentDate,
-			user_id: req.body.user_id
+			id_user: req.body.id_user
 		}
 
 		modelPayment
