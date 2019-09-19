@@ -60,7 +60,7 @@ module.exports = {
 			room_area,
 			image,
 			room_type_id,
-			statuss
+			status
 		}
 		// console.log(data)
 		// let a = facilities.split(",")
