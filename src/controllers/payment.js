@@ -43,7 +43,7 @@ module.exports = {
 			status: req.body.status,
 			invoice_id: req.body.invoice_id,
 			bank: req.body.bank_code,
-			paymentDate: new Date(Date.now()),
+			paymentDate: req.body.paymentDate,
 			user_id: req.body.user_id
 		}
 
