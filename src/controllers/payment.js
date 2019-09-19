@@ -27,31 +27,18 @@ module.exports = {
 						message: 'Payment data does not exist'
 					})
 				} else {
-					axios.get(`https://api.xendit.co/v2/invoices/${result[0].invoice_id}`,{headers:{Authorization:token}})
-					.then(success=>{
-						console.log(success.data)
-						var xendit = success.data
-						return res.send({
-							status: 200,
-							message: 'Payment details has been successfully retrieved!',
-							result,
-							xendit
-						})
-					}).catch(err =>{
-						return res.send({
-							status: 403,
-							message: 'Payment Wrong, Contact Us to Fix it!',
-							result,
-						})
+					return res.send({
+						status: 200,
+						id,
+						message: 'Payment details has been successfully retrieved!',
+						result
 					})
-			
-
-					
 				}
 			})
 			.catch(err => console.log(err))
 	},
 	createPayment:async (req, res) => {
+
 		const DataInvoice = {
 			external_id: req.body.bookid,
 			payer_email: req.body.email,
@@ -91,13 +78,9 @@ module.exports = {
 	
 	},
 	updatePayment: (req, res) => {
-
-		const id = req.body.external_id
+		const id = req.params.id
 		const data = {
-			bookid: req.body.external_id,
-			status: req.body.status,
-			bank: req.body.bank_code,
-			amount: req.body.paid_amount
+			status: req.body.status
 		}
 		modelPayment
 			.getAPayment(id)
@@ -144,4 +127,17 @@ module.exports = {
 			})
 			.catch(err => console.log(err))
 	},
+	paid:(req,res)=>{
+	
+        const data = {
+            'bookid':req.body.external_id,
+            'status':req.body.status,
+            'bank':req.body.bank_code,
+            'amount':req.body.paid_amount,
+		}
+        modelPayment.paid(data,req.body.external_id)
+         .then((result,err)=>{
+             res.json({result})
+         }) 
+    }
 }
