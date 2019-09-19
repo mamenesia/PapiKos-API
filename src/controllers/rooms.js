@@ -53,14 +53,14 @@ module.exports = {
 			]
 		}
 		const data = {
-			name,
-			description,
-			price,
-			id_partner,
-			room_area,
-			image,
-			room_type_id,
-			status
+			name, //
+			description, //
+			price, //
+			id_partner, //
+			room_area, //
+			image, //
+			room_type_id, //
+			status //
 		}
 		// console.log(data)
 		// let a = facilities.split(",")
