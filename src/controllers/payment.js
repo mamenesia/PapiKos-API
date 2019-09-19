@@ -7,7 +7,7 @@ module.exports = {
 		modelPayment
 			.getPayments()
 			.then(result => {
-				res.send({
+				res.json({
 					status: 200,
 					message: 'All Payments detail has successfully retrieved',
 					result
@@ -22,17 +22,28 @@ module.exports = {
 			.getAPayment(id)
 			.then(result => {
 				if (result[0] === undefined) {
-					return res.status(400).send({
+					return res.status(400).json({
 						status: 400,
 						message: 'Payment data does not exist'
 					})
 				} else {
-					return res.send({
-						status: 200,
-						id,
-						message: 'Payment details has been successfully retrieved!',
-						result
+
+					var invoice = result[0].invoice_id
+
+
+					axios.get(`https://api.xendit.co/v2/invoices/${invoice}`,{headers:{Authorization:token}})
+					.then(datas=>{
+						res.json({
+							status: 200,
+							id,
+							message: 'Payment details has been successfully retrieved!',
+							result: result,
+							xendit:datas.data
+						})
+						console.log(datas.data)
+						
 					})
+				
 				}
 			})
 			.catch(err => console.log(err))
@@ -60,6 +71,7 @@ module.exports = {
 				modelPayment
 				.createPayment(data)
 				.then(data => {
+					var xendit = result.data
 					res.send({
 						status: 200,
 						message: 'Payment has been added',
@@ -71,7 +83,9 @@ module.exports = {
 							bank: req.body.bank_code,
 							paymentDate: new Date(Date.now()),
 							id_user: req.body.id_user
-						}
+						},
+						xendit
+						
 					})
 				}).catch(err => console.log(err))})
 			.catch(err=>{res.status(403).json(err)})
