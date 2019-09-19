@@ -60,7 +60,7 @@ module.exports = {
 			room_area,
 			image,
 			room_type_id,
-			status: 'true'
+			statuss
 		}
 		// console.log(data)
 		// let a = facilities.split(",")
@@ -91,10 +91,10 @@ module.exports = {
 		const data = { ...req.body }
 		modelRooms
 			.getRoomById(id)
-			.then(rs => {
+			.then(async rs => {
 				if (rs.length > 0) {
 					if (req.files.length > 0) {
-						data.image = `${uploadImage(req)}`
+						image = `${await uploadImage(req)}`
 					}
 					return modelRooms
 						.editRoom(data, id)
@@ -160,6 +160,7 @@ module.exports = {
 			sorting: req.query.sort,
 			status: req.query.status,
 			type: req.query.type,
+			gender: req.query.gender,
 			search: req.query.search
 		}
 		const limit = parseInt(req.query.limit, 10) || 15

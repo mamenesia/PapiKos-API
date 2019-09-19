@@ -37,7 +37,7 @@ module.exports = {
   getRoomById: id => {
     return new Promise((resolve, reject) => {
       conn.query(
-        `select room.id,room.name,room.image,room.description, room.price, room.status , room.room_area, room_type.name as type, room_type.facilities, room.gender, partner.id as id_partner, partner.name as partner, partner.phone, partner.address, partner.latitude, partner.longitude from room INNER JOIN partner on room.id_partner = partner.id INNER JOIN room_type on room_type_id = room_type.id WHERE room.id =?`,
+        `select room.id,room.name,room.image,room.description, room.price, room.status , room.room_area, room_type.name as type, room_type.facilities, room.gender, partner.id as id_partner, partner.fullname as partner, partner.labelName, partner.phone, partner.address, partner.latitude, partner.longitude from room INNER JOIN partner on room.id_partner = partner.id INNER JOIN room_type on room_type_id = room_type.id WHERE room.id =?`,
         id,
         (err, rs) => {
           if (!err) {
@@ -58,7 +58,7 @@ module.exports = {
       const search = param.search
 
       console.log(param)
-      let basicquery = `select room.id,room.name,room.image,room.description, room.price, room.status , room.room_area, room_type.name as type, room_type.facilities, room.gender, partner.id as id_partner, partner.name as partner, partner.phone, partner.address, partner.latitude, partner.longitude from room INNER JOIN partner on room.id_partner = partner.id INNER JOIN room_type on room_type_id = room_type.id where 1 `
+      let basicquery = `select room.id,room.name,room.image,room.description, room.price, room.status , room.room_area, room_type.name as type, room_type.facilities, room.gender, partner.id as id_partner, partner.fullname as partner,partner.labelName, partner.phone, partner.address, partner.latitude, partner.longitude from room INNER JOIN partner on room.id_partner = partner.id INNER JOIN room_type on room_type_id = room_type.id where 1 `
       if (status != null) {
         basicquery += ` AND status = '${status}'`
       }
@@ -101,5 +101,5 @@ module.exports = {
 }
 /*
 Room Data
-select room.id,room.name,room.image,room.description, room.price, room.status , room.room_area, room_type.name as type, room_type.facilities, room.gender, partner.id as id_partner, partner.name as partner, partner.phone, partner.address, partner.latitude, partner.longitude from room INNER JOIN partner on room.id_partner = partner.id INNER JOIN room_type on room_type_id = room_type.id
+select room.id,room.name,room.image,room.description, room.price, room.status , room.room_area, room_type.name as type, room_type.facilities, room.gender, partner.id as id_partner, partner.fullname as partner, partner.phone, partner.address, partner.latitude, partner.longitude from room INNER JOIN partner on room.id_partner = partner.id INNER JOIN room_type on room_type_id = room_type.id
 */
