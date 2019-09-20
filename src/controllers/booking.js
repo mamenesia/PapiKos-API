@@ -116,8 +116,12 @@ module.exports = {
       .catch(err => console.log(err))
   },
   getHistory: (req, res) => {
+    const paramUrl = {
+      id_user: req.query.id_partner,
+      id_booking: req.query.id_booking
+    }
     modelBooking
-      .getHistory()
+      .getHistory(paramUrl)
       .then(result => {
         res.send({
           status: 200,
