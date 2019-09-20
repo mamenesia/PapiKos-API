@@ -3,7 +3,7 @@ const conn = require('../config/db')
 module.exports = {
 	getPayments: () => {
 		return new Promise((resolve, reject) => {
-			conn.query('SELECT * FROM payment', (err, result) => {
+			conn.query('SELECT * FROM payment ORDER BY id DESC', (err, result) => {
 				if (!err) {
 					resolve(result)
 				} else {
@@ -61,14 +61,16 @@ module.exports = {
 		})
 	},
 
-	paid:(data,external_id)=>{
-        return new Promise((resolve,reject)=>{
-            conn.query('update payment set ? where bookid = ?',[data,external_id],(err,result)=>{
-                 if (!err)
-                     resolve(result)
-                     reject(err)
-            })
-    })},
-
-
+	paid: (data, external_id) => {
+		return new Promise((resolve, reject) => {
+			conn.query(
+				'update payment set ? where bookid = ?',
+				[data, external_id],
+				(err, result) => {
+					if (!err) resolve(result)
+					reject(err)
+				}
+			)
+		})
+	}
 }
