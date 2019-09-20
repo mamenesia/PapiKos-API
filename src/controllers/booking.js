@@ -59,7 +59,8 @@ module.exports = {
 						price: req.body.price,
 						startDate: req.body.startDate,
 						endDate: req.body.endDate
-					}
+					},
+					result
 				})
 			})
 			.catch(err => console.log(err))
