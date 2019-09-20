@@ -62,18 +62,24 @@ module.exports = {
       })
     })
   },
-  getHistory: () => {
+  getHistory: param => {
     return new Promise((resolve, reject) => {
-      conn.query(
-        `select booking.id, payment.amount, payment.bank, payment.status, booking.id_user,user.fullname, partner.fullname, partner.labelName from booking inner join payment on booking.id = payment.bookid inner JOIN user on booking.id_user = user.id inner JOIN partner on booking.id_partner = partner.id`,
-        (err, result) => {
-          if (!err) {
-            resolve(result)
-          } else {
-            reject(err)
-          }
+      const id_user = param.id_user
+      const id_booking = param.id_booking
+      let basicquery = `select booking.id, payment.amount, payment.bank, payment.status, booking.id_user,user.fullname, partner.fullname, partner.labelName from booking inner join payment on booking.id = payment.bookid inner JOIN user on booking.id_user = user.id inner JOIN partner on booking.id_partner = partner.id where 1`
+      if (id_user != null) {
+        basicquery += ` AND booking.id_user = '${id_user}'`
+      }
+      if (id_booking != null) {
+        basicquery += ` AND booking.id = '${id_booking}'`
+      }
+      conn.query(basicquery, (err, rs) => {
+        if (!err) {
+          resolve(rs)
+        } else {
+          reject(err)
         }
-      )
+      })
     })
   },
   getAHistory: id => {
