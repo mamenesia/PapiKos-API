@@ -1,11 +1,16 @@
 {
 	"name": "papikos",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "papikos API",
 	"main": "app.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "nodemon app.js"
+		"start": "nodemon app.js",
+		"release": "standard-version",
+		"release:pre": "npm run release -- --prerelease",
+		"release:patch": "npm run release -- --release-as patch",
+		"release:minor": "npm run release -- --release-as minor",
+		"release:major": "npm run release -- --release-as major"
 	},
 	"repository": {
 		"type": "git",
@@ -38,6 +43,7 @@
 		"multer": "^1.4.2",
 		"mysql": "^2.17.1",
 		"nodemon": "^1.19.2",
-		"redis": "^2.8.0"
+		"redis": "^2.8.0",
+		"standard-version": "^9.5.0"
 	}
 }
